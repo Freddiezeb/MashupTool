@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>A Mashup Tool</title>
-    <h1>Testing multiline commits</h1>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>A Mashup Tool</title>
+        <h1>Testing multiline commits</h1>
+    </head>
+    <body>
+
+        <!-- Sökformulär -->
+        <form action="" method="get" id="search-form">
+            Movie: <input type="text" name="query">
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- Här placerar vi vårt resultat -->
+        <div id="result">
+            <p>Result will be displayed here!</p>
+        </div>
+
+        <!-- Här placerar vi vårt resultat -->
+        <div id="result2">
+            <p>Result will be displayed here!</p>
+        </div>
+
+        <iframe id="ytVideo" 
+                allowfullscreen
+                width="420" 
+                height="345" 
+                src="https://www.youtube.com/embed/" >
+        </iframe>
+
+        <link rel="stylesheet" href="style.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="mashuptool.js"></script>
+    </body>
 </html>
