@@ -28,7 +28,7 @@ form.addEventListener("submit", function(event) {
         // Konvertera resultatet från JSON
         var result = JSON.parse(this.responseText);
         // Skriv ut resultatet
-        omdbesult.innerHTML = "Title: " 
+        omdbResult.innerHTML = "Title: " 
             + JSON.stringify(result.Title) 
             + " Year: " 
             + JSON.stringify(result.Year);
