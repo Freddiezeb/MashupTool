@@ -3,35 +3,53 @@
     <head>
         <meta charset="UTF-8">
         <title>A Mashup Tool</title>
-        <h1>Testing multiline commits</h1>
     </head>
     <body>
 
-        <!-- Sökformulär -->
-        <form action="" method="get" id="search-form">
-            Movie: <input type="text" name="query">
-            <button type="submit">Search</button>
-        </form>
+        <section class="intro">
+            <div class="inner">
+                <div class="content">
+                    <h1>Seach for a movie</h1>
+                    
+                    <!-- Sökformulär -->
+                    <form action="" method="get" id="search-form">
+                        Movie: <input type="text" name="query">
+                        <button type="submit">Search</button>
+                    </form>
+        <br>
+                    <!-- Här placerar vi vårt resultat -->
+                    <div id="omdbResult">
+                        <p></p>
+                    </div>
 
-        <!-- Här placerar vi vårt resultat -->
-        <div id="result">
-            <p>Result will be displayed here!</p>
-        </div>
+                    <!-- Här placerar vi vårt resultat -->
+                    <div id="youtubeResult">
+                        <p></p>
+                    </div>
 
-        <!-- Här placerar vi vårt resultat -->
-        <div id="result2">
-            <p>Result will be displayed here!</p>
-        </div>
+                    <iframe id="ytVideo" 
+                            allowfullscreen
+                            width="420" 
+                            height="345" 
+                            src="https://www.youtube.com/embed/" >
+                    </iframe>
+                    <br>
+                    <iframe id="fbShareVideo"
+                            src="https://www.facebook.com/" 
+                            width="60" 
+                            height="20" 
+                            style="border:none;overflow:hidden" 
+                            scrolling="no" 
+                            frameborder="0" 
+                            allowTransparency="true">
+                    </iframe>
+                </div>
+            </div>
+        </section>
 
-        <iframe id="ytVideo" 
-                allowfullscreen
-                width="420" 
-                height="345" 
-                src="https://www.youtube.com/embed/" >
-        </iframe>
-
-        <link rel="stylesheet" href="style.css">
+          <link rel="stylesheet" href="style.css">
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="mashuptool.js"></script>
+   
     </body>
 </html>

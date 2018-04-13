@@ -1,57 +1,54 @@
 "use strict";
 
-console.log("Success");// Hämta formuläret
+// Get our forms
 var form = document.getElementById("search-form");
+var fbShare = document.getElementById("fbShareVideo");
 var ytPlayer = document.getElementById("ytVideo");
-
-var omdbResult = document.getElementById("result");
-var youtubeResult = document.getElementById("result2");
+var omdbResult = document.getElementById("omdbResult");
+var youtubeResult = document.getElementById("youtubeResult");
 
 form.addEventListener("submit", function(event) {
-    // Avbryt så att formuläret inte skickas
+    
+    // Prevent the form to be sent
     event.preventDefault();
-    // Sökord (query) för en film
+    
+    // Take the user input and add it to a String
     var query = this.elements.query.value;
 
-    console.log("You searched for: ", query);
-
-    // Objekt för att hantera AJAX
+    // Object to handle AJAX
     var omdbAPI = new XMLHttpRequest();
     var youtubeAPI = new XMLHttpRequest();
 
-    // Den URL vi ska använda oss av.
+    // omdb URL
     var omdbURL = "http://www.omdbapi.com/?t="+query+"&type=movie&apikey=e15d9329";
-    //    var youtubeURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q="+query+"&key=AIzaSyA-83C98_XAXZ9NEYB2zj0TDlsSHXds8Uk";
 
-    // Vad vill vi göra när vi fått ett svar?
     omdbAPI.addEventListener("load", function() {
-        // Konvertera resultatet från JSON
+
+        // Convert the result from JSON 
+        // Then add it to the youtube URL
         var result = JSON.parse(this.responseText);
-        // Skriv ut resultatet
-        omdbResult.innerHTML = "Title: " 
-            + JSON.stringify(result.Title) 
-            + " Year: " 
-            + JSON.stringify(result.Year);
-        omdbResult.innerHTML = result.Title;
-        console.log(result);
         var youtubeURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q="+result.Title+ " trailer&key=AIzaSyA-83C98_XAXZ9NEYB2zj0TDlsSHXds8Uk";
 
-        youtubeAPI.addEventListener("load", function() {
-            // Konvertera resultatet från JSON
-            var result = JSON.parse(this.responseText);
-            // Skriv ut resultatet
-            youtubeResult.innerHTML = JSON.stringify(result.items[0].snippet.title);
-            ytPlayer.src = "https://www.youtube.com/embed/" + result.items[0].id.videoId;
-            console.log(result);
-        }); 
-        youtubeAPI.open("get", youtubeURL, true);
-        youtubeAPI.send();
-        
-        
-    }); 
+        // Display the result
+        omdbResult.innerHTML = "Movie title: " 
+            + JSON.stringify(result.Title) 
+            + " Year: " 
+            + result.Year;
 
-    // Ange vilken metod (get) samt URL vi ska skicka med
+        // Sending youtube our URL
+        youtubeAPI.open("get", youtubeURL, false);
+        youtubeAPI.send(null);
+
+        // Convert the result from JSON
+        var ytResult = JSON.parse(youtubeAPI.responseText);
+
+        // Display the result on the page and add it to the FB-share button
+        youtubeResult.innerHTML = JSON.stringify(ytResult.items[0].snippet.title);
+        ytPlayer.src = "https://www.youtube.com/embed/" + ytResult.items[0].id.videoId;
+        fbShare.src = "https://www.facebook.com/plugins/share_button.php?href=" + ytPlayer.src + "&layout=button&size=small&mobile_iframe=true&width=60&height=20&appId";
+        // console.log(result);
+    }); 
+    // Send request to the website for information (Get).
     omdbAPI.open("get", omdbURL, true);
     omdbAPI.send();
-
 });
